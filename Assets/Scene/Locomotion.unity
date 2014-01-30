@@ -727,10 +727,14 @@ Prefab:
     - target: {fileID: 11400002, guid: 79efd4c2b57a6d24f9555a5851c00ad1, type: 2}
       propertyPath: gamecam
       value: 
-      objectReference: {fileID: 815276759}
+      objectReference: {fileID: 815276761}
     - target: {fileID: 11400000, guid: 79efd4c2b57a6d24f9555a5851c00ad1, type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 79efd4c2b57a6d24f9555a5851c00ad1, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 79efd4c2b57a6d24f9555a5851c00ad1, type: 2}
@@ -1173,6 +1177,8 @@ GameObject:
   - 81: {fileID: 815276754}
   - 114: {fileID: 815276760}
   - 114: {fileID: 815276759}
+  - 114: {fileID: 815276761}
+  - 114: {fileID: 815276762}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1252,24 +1258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59969cb0b132da4683696fcedac6864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentRig: {fileID: 0}
-  distanceAway: 0
-  distanceAwayMultipler: 1.5
-  distanceUp: 0
-  distanceUpMultiplier: 5
-  follow: {fileID: 0}
-  followXform: {fileID: 0}
-  widescreen: .200000003
-  targetingTime: .5
-  firstPersonLookSpeed: 3
-  firstPersonXAxisClamp: {x: -70, y: 90}
-  fPSRotationDegreePerSecond: 120
-  firstPersonThreshold: .5
-  freeThreshold: -.100000001
-  camMinDistFromChar: {x: 1, y: -.5}
-  rightStickThreshold: .100000001
-  camSmoothDampTime: .100000001
-  lookDirDampTime: .100000001
 --- !u!114 &815276760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1272,49 @@ MonoBehaviour:
   shader: {fileID: 0}
   coverage: .100000001
   barTexture: {fileID: 0}
+--- !u!114 &815276761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815276753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed71c1bf317d488197615b1fddf0b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceAway: 5
+  distanceUp: 2
+  followXform: {fileID: 0}
+  smooth: 3
+  offset: {x: 0, y: 1.5, z: 0}
+  camSmoothDampTime: .100000001
+--- !u!114 &815276762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815276753}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9aaa3f5f2d574f228e4a21aa38b61e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 1
+  showGeneratedNormals: 0
+  offsetScale: .200000003
+  blurRadius: 18
+  edgeThresholdMin: .0500000007
+  edgeThreshold: .200000003
+  edgeSharpness: 4
+  dlaaSharp: 0
+  ssaaShader: {fileID: 4800000, guid: b3728d1488b02490cbd196c7941bf1f8, type: 3}
+  dlaaShader: {fileID: 4800000, guid: 017ca72b9e8a749058d13ebd527e98fa, type: 3}
+  nfaaShader: {fileID: 4800000, guid: ce0cb2621f6d84e21a87414e471a3cce, type: 3}
+  shaderFXAAPreset2: {fileID: 4800000, guid: 6f1418cffd12146f2a83be795f6fa5a7, type: 3}
+  shaderFXAAPreset3: {fileID: 4800000, guid: c182fa94a5a0a4c02870641efcd38cd5, type: 3}
+  shaderFXAAII: {fileID: 4800000, guid: cd5b323dcc592457790ff18b528f5e67, type: 3}
+  shaderFXAAIII: {fileID: 4800000, guid: c547503fff0e8482ea5793727057041c, type: 3}
 --- !u!1 &830950016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,6 +1341,32 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1606428654}
+--- !u!1 &838707652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 838707653}
+  m_Layer: 0
+  m_Name: Follow
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &838707653
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 838707652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 849114393}
 --- !u!1 &849114392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1379,7 @@ GameObject:
   - 54: {fileID: 849114397}
   - 136: {fileID: 849114396}
   - 114: {fileID: 849114395}
+  - 114: {fileID: 849114394}
   m_Layer: 0
   m_Name: Beta
   m_TagString: Player
@@ -1341,7 +1399,30 @@ Transform:
   m_Children:
   - {fileID: 347398123}
   - {fileID: 1633216967}
+  - {fileID: 838707653}
   m_Father: {fileID: 0}
+--- !u!114 &849114394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 849114392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14064c8d78a374223b2c57d45e38ecde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  on: 1
+  onlyInPlayMode: 1
+  sceneViewFollowers:
+  - enable: 1
+    positionOffset: {x: 0, y: 6, z: 0}
+    enableFixedRotation: 1
+    fixedRotation: {x: 90, y: 0, z: 0}
+    targetTransform: {fileID: 849114393}
+    size: 4.63999987
+    orthographic: 0
+    sceneViewIndex: 0
 --- !u!114 &849114395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1356,6 +1437,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 849114398}
   directionDampTime: .25
+  gamecam: {fileID: 815276761}
+  directionSpeed: 3
+  rotationDegreePerSecond: 120
 --- !u!136 &849114396
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1385,7 +1469,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!95 &849114398
 Animator:
   serializedVersion: 2
@@ -1705,6 +1789,7 @@ GameObject:
   - 4: {fileID: 997566832}
   - 33: {fileID: 997566834}
   - 23: {fileID: 997566833}
+  - 64: {fileID: 997566835}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -1752,6 +1837,19 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 1859033523}
   m_GameObject: {fileID: 997566831}
+  m_Mesh: {fileID: 4300000, guid: d4fb977d747bb9c4d8ea60911ec249c5, type: 3}
+--- !u!64 &997566835
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997566831}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: d4fb977d747bb9c4d8ea60911ec249c5, type: 3}
 --- !u!1 &1020592149
 GameObject:
@@ -1817,6 +1915,7 @@ GameObject:
   - 4: {fileID: 1115043642}
   - 33: {fileID: 1115043644}
   - 23: {fileID: 1115043643}
+  - 64: {fileID: 1115043645}
   m_Layer: 0
   m_Name: Roof
   m_TagString: Untagged
@@ -1864,6 +1963,19 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 1859033523}
   m_GameObject: {fileID: 1115043641}
+  m_Mesh: {fileID: 4300002, guid: d4fb977d747bb9c4d8ea60911ec249c5, type: 3}
+--- !u!64 &1115043645
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1115043641}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
   m_Mesh: {fileID: 4300002, guid: d4fb977d747bb9c4d8ea60911ec249c5, type: 3}
 --- !u!1 &1115487583
 GameObject:
@@ -2882,6 +2994,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1735245705}
+  - 64: {fileID: 1735245706}
   m_Layer: 0
   m_Name: InvertedCubeRoom
   m_TagString: Untagged
@@ -2902,6 +3015,19 @@ Transform:
   - {fileID: 997566832}
   - {fileID: 1115043642}
   m_Father: {fileID: 0}
+--- !u!64 &1735245706
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1735245704}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 0}
 --- !u!1 &1744738118
 GameObject:
   m_ObjectHideFlags: 0
