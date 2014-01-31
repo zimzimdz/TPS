@@ -2,6 +2,14 @@
 using UnityEngine;
 using System.Collections;
 
+struct CameraPosition {
+	private Vector3 position;
+	private Transform xForm;
+	public Vector3 Position {get {return position;} set {position = value;}}
+	public Transform XForm {get {return xForm;} set{xForm = value;}}
+
+
+}
 public class ThirdPersonCamera : MonoBehaviour
 {
 	#region Variables (private)
