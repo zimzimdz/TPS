@@ -30,10 +30,21 @@ public class CharacterControllerLogic : MonoBehaviour
 	// Hashes
 	private int m_LocomotionId = 0;
 
+	public Animator Animator { get {return animator;}}
+	public float Speed
+	{
+		get
+		{
+			return this.speed;
+		}
+	}
+	
+	public float LocomotionThreshold { get { return 0.2f; } }
 	
 	void Start() 
 	{
 		animator = GetComponent<Animator>();
+
 
 		if(animator.layerCount >= 2)
 		{
@@ -47,7 +58,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
 	void Update() 
 	{
-		if (animator)
+		if (animator && gamecam.CameraState != ThirdPersonCamera.CamState.FirstPerson)
 		{
 			stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 			// Pull values from controller/keyboard

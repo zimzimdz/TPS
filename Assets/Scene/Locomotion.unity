@@ -1268,13 +1268,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceAway: 5
+  fPSRotationDegreePerSecond: 120
   distanceUp: 2
   followXform: {fileID: 0}
   smooth: 3
   offset: {x: 0, y: 1.5, z: 0}
+  firstPersonThreshold: .5
+  firstPersonLookSpeed: 3
+  firstPersonXAxisClamp: {x: -70, y: 45}
+  follow: {fileID: 0}
   camSmoothDampTime: .100000001
   wideScreen: .200000003
   targetingTime: .5
+  lookDirDampTime: .100000001
 --- !u!1 &830950016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,7 +1317,7 @@ GameObject:
   - 4: {fileID: 838707653}
   m_Layer: 0
   m_Name: Follow
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1373,12 +1379,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   on: 1
-  onlyInPlayMode: 1
+  onlyInPlayMode: 0
   sceneViewFollowers:
   - enable: 1
-    positionOffset: {x: 0, y: 6, z: 0}
+    positionOffset: {x: 1.60000002, y: 1.25, z: .730000019}
     enableFixedRotation: 1
-    fixedRotation: {x: 90, y: 0, z: 0}
+    fixedRotation: {x: 0, y: 89.9100037, z: 0}
     targetTransform: {fileID: 849114393}
     size: 4.63999987
     orthographic: 0
