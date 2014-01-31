@@ -88,7 +88,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		Vector3 moveDirection = referentialShift * stickDirection;
 		Vector3 axisSign = Vector3.Cross(moveDirection, rootDirection);
 		
-		//Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), moveDirection, Color.green);
+		Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), moveDirection, Color.green);
 //		Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), rootDirection, Color.magenta);
 		//Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), stickDirection, Color.blue);
 		//Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2.5f, root.position.z), axisSign, Color.red);
