@@ -69,7 +69,10 @@ public class CharacterControllerLogic : MonoBehaviour
 			StickToWorldspace(this.transform, gamecam.transform, ref direction, ref speed);		
 			animator.SetFloat("Speed", speed);
 			animator.SetFloat("Direction", direction, directionDampTime, Time.deltaTime);
-		} 
+		}
+
+			animator.SetBool("Jump", Input.GetButton("Jump"));
+
 	}
 
 	void FixedUpdate(){

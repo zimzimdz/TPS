@@ -40,8 +40,6 @@ public class ThirdPersonCamera : MonoBehaviour
 	private float firstPersonLookSpeed = 3.0f;
 	[SerializeField]
 	private Vector2 firstPersonXAxisClamp = new Vector2(-70.0f, 45.0f);
-	private Vector3 targetPosition;
-	private Vector3 lookDir;
 	[SerializeField]
 	private CharacterControllerLogic follow;
 	private Vector3 velocityCamSmooth = Vector3.zero;
@@ -51,7 +49,6 @@ public class ThirdPersonCamera : MonoBehaviour
 	private float wideScreen = 0.2f;
 	[SerializeField]
 	private float targetingTime = 0.5f;
-	private Vector3 velocityLookDir = Vector3.zero;
 	[SerializeField]
 	private float lookDirDampTime = 0.1f;
 	private CamState camState = CamState.Behind;
@@ -59,6 +56,9 @@ public class ThirdPersonCamera : MonoBehaviour
 	private float xAxisRot = 0.0f;
 	private float lookWeight;
 	private Vector3 curLookDir;
+	private Vector3 targetPosition;
+	private Vector3 lookDir;
+	private Vector3 velocityLookDir = Vector3.zero;
 	#endregion
 	
 	public CamState CameraState{get {return camState;}}
@@ -91,22 +91,14 @@ public class ThirdPersonCamera : MonoBehaviour
 	{
 		
 	}
-	
-	/// <summary>
-	/// Debugging information should be put here.
-	/// </summary>
-	void OnDrawGizmos ()
-	{	
-		
-	}
+
 	
 	void LateUpdate()
 	{		
 		float rightX = Input.GetAxis("RightStickX");
 		float rightY = Input.GetAxis("RightStickY");
-
 		float leftX = Input.GetAxis("Horizontal");
-		float leftY = Input.GetAxis("Vertical");
+		float leftY = Input.GetAxis("Vertical");	
 
 		Vector3 characterOffset = followXform.position + new Vector3(0f, distanceUp, 0f);
 		Vector3 lookAt = characterOffset;
@@ -116,8 +108,7 @@ public class ThirdPersonCamera : MonoBehaviour
 			camState = CamState.Target;
 		else {
 			// * First Person *
-			if (rightY > firstPersonThreshold && !follow.IsInLocomotion())
-			{
+			if (rightY > firstPersonThreshold && !follow.IsInLocomotion()){
 				// Reset look before entering the first person mode
 				xAxisRot = 0;
 				lookWeight = 0f;
@@ -125,19 +116,17 @@ public class ThirdPersonCamera : MonoBehaviour
 			}
 			// * Behind the back *
 			if ((camState == CamState.FirstPerson && Input.GetButton("ExitFPV")) || 
-			    (camState == CamState.Target && (Input.GetAxis("Target") <= TARGETING_THRESHOLD)))
-			{
+			    (camState == CamState.Target && (Input.GetAxis("Target") <= TARGETING_THRESHOLD))){
 				camState = CamState.Behind;	
 			}
-		}
 
+		}
 		follow.Animator.SetLookAtWeight (lookWeight);
 		switch (camState) {
 		case CamState.Behind:
 			ResetCamera();
 			// Only update camera look direction if moving
-			if (follow.Speed > follow.LocomotionThreshold && follow.IsInLocomotion())
-			{
+			if (follow.Speed > follow.LocomotionThreshold && follow.IsInLocomotion()) {
 				lookDir = Vector3.Lerp(followXform.right * (leftX < 0 ? 1f : -1f), followXform.forward * (leftY < 0 ? -1f : 1f), Mathf.Abs(Vector3.Dot(this.transform.forward, followXform.forward)));
 				Debug.DrawRay(this.transform.position, lookDir, Color.white);
 				
@@ -157,6 +146,7 @@ public class ThirdPersonCamera : MonoBehaviour
 		case CamState.Target:
 			ResetCamera();
 			lookDir = followXform.forward;
+			curLookDir = followXform.forward;
 			targetPosition = characterOffset + followXform.up * distanceUp - lookDir * distanceAway;
 			break;
 		case CamState.FirstPerson:
@@ -189,12 +179,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
 		}
 
-
-
 		CompensateForWalls (characterOffset, ref targetPosition);
 		smoothPosition (transform.position, targetPosition);
-		//transform.position = Vector3.Lerp (transform.position, targetPosition, Time.deltaTime*smooth);
-
 		transform.LookAt (lookAt);
 	}
 
