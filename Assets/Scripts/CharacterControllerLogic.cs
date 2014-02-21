@@ -71,7 +71,10 @@ public class CharacterControllerLogic : MonoBehaviour
 			animator.SetFloat("Direction", direction, directionDampTime, Time.deltaTime);
 		}
 
-			animator.SetBool("Jump", Input.GetButton("Jump"));
+		animator.SetBool("Jump", Input.GetButton("Jump"));
+		if (IsInJump ()) {
+			if(IsInLocomotionJump()) transform.Translate(Vector3.forward * Time.deltaTime * 3f);
+		}
 
 	}
 
@@ -117,5 +120,20 @@ public class CharacterControllerLogic : MonoBehaviour
 	public bool IsInLocomotion()
 	{
 		return stateInfo.nameHash == m_LocomotionId;
+	}
+
+	public bool IsInJump()
+	{
+		return (IsInIdleJump() || IsInLocomotionJump());
+	}
+	
+	public bool IsInIdleJump()
+	{
+		return animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Jump");
+	}
+	
+	public bool IsInLocomotionJump()
+	{
+		return animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.RunninJump");
 	}
 }

@@ -53,6 +53,7 @@ public class ThirdPersonCamera : MonoBehaviour
 	private float lookDirDampTime = 0.1f;
 	private CamState camState = CamState.Behind;
 	private CameraPosition firstPersonCamPos;
+	private CameraPosition shoulderCamPos;
 	private float xAxisRot = 0.0f;
 	private float lookWeight;
 	private Vector3 curLookDir;
@@ -67,6 +68,7 @@ public class ThirdPersonCamera : MonoBehaviour
 		Behind,
 		FirstPerson,
 		Target,
+		Shoulder,
 		Free
 	}
 
@@ -83,6 +85,13 @@ public class ThirdPersonCamera : MonoBehaviour
 			new GameObject ().transform,
 			followXform
 		);
+		shoulderCamPos = new CameraPosition ();
+		shoulderCamPos.Init (
+			"ShoulderCamera",
+			new Vector3 (0.9f, 1.81f, -1.248f),
+			new GameObject ().transform,
+			followXform
+			);
 
 	}
 
